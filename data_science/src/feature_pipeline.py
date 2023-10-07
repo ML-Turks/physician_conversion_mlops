@@ -42,13 +42,17 @@ class DataPrep:
         applies feature selection, and saves the preprocessed data back to S3.
         """
 
-        
         #Load data from s3
         bucket_name = self.conf['s3']['bucket_name']
         file_path = self.conf['s3']['file_path']
         aws_region = self.conf['s3']['aws_region']
 
         df_input = utils.load_data_from_s3(self, bucket_name,aws_region, file_path)
+
+        #Clean column name and convert to lower case
+        df_input.columns = df_input.columns.str.strip()
+        df_input.columns = df_input.columns.str.replace(' ', '_')
+        df_input.columns = df_input.columns.str.lower()
         
         #Drop unwanted column: "HCO Affiliation" - "Affiliation Type" is more valid column for us
         df_input.drop(self.conf['feature_transformation']['drop_column_list'], axis=1, inplace=True)
