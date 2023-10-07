@@ -64,7 +64,7 @@ class DataPrep:
         df_input.drop(self.conf['feature_transformation']['drop_column_list'], axis=1, inplace=True)
 
         #One hot encode categorical features
-        df_input = pd.get_dummies(df_input, columns=self.cof['feature_transformation']['one_hot_encode_feature_list'], drop_first=True)
+        df_input = pd.get_dummies(df_input, columns=self.conf['feature_transformation']['one_hot_encode_feature_list'], drop_first=True)
         df_input.columns = df_input.columns.str.replace(" ", "").str.replace("-", "")
         
         #Select variables for feature selection
@@ -158,8 +158,6 @@ class DataPrep:
 
 
 if __name__ == '__main__':
-    # with open('./conf/feature_pipepline.yml', 'r') as config_file:
-    #     configuration = yaml.safe_load(config_file)
     task = DataPrep()
     task.preprocess_data()
 
