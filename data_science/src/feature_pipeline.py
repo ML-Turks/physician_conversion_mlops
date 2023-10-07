@@ -88,7 +88,7 @@ class DataPrep:
             entire data
         """
         target = self.conf['feature_transformation']['target_col']
-        inference_size = self.conf['param_values']['target_col']
+        inference_size = self.conf['param_values']['inference_size']
         X = df_input.drop(target, axis=1)
         y = df_input[target]
         X_train_set, X_inference, y_train_set, y_inference = train_test_split(X, y,
