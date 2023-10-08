@@ -44,3 +44,7 @@ jobs:
       - name: Run the feature_pipeline workflow in a jobless fashion
         run: |
           python data_science/src/feature_pipeline.py
+
+      - name: Run the training_pipeline workflow in a jobless fashion
+        run: |
+          python data_science/src/training_pipeline.py
