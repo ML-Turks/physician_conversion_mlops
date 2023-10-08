@@ -127,7 +127,7 @@ class Trainmodel():
                 X_val, y_val,
                   drop_id_col_list))
             
-            root_path = "..\.."
+            root_path = "/.."
             mlflow_path_cm_train = os.path.join(root_path,"data","output", "mlflow","confusion_matrix_train.png")
             mlflow_path_cm_val = os.path.join(root_path,"data","output", "mlflow","confusion_matrix_validation.png")
             mlflow_path_roc = os.path.join(root_path,"data","output", "mlflow","'roc_curve.png'")
