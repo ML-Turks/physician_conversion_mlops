@@ -89,6 +89,8 @@ class Trainmodel():
                                                                 stratify= y)
         
         #logging model in mlflow
+        mlflow.xgboost.autolog()
+        mlflow.set_experiment(self.conf['mlflow']['experiment_name'])
         with mlflow.start_run():
             drop_id_col_list = self.conf['feature_transformation']['id_col_list']
             best_params = self.conf['train_model_parameters']['model_params']
@@ -129,7 +131,7 @@ class Trainmodel():
             mlflow.log_artifact('confusion_matrix_train.png')
             mlflow.log_artifact('confusion_matrix_validation.png')
             mlflow.log_artifact('roc_curve.png')
-
+    
 
     
 
