@@ -131,11 +131,11 @@ class Trainmodel():
             #mlflow_path_cm_train = os.path.join("..","..","data","output", "mlflow_exp_logs","confusion_matrix_train.png")
             # mlflow_path_cm_val = os.path.join("..","..","data","output", "mlflow_exp_logs","confusion_matrix_validation.png")
             # mlflow_path_roc = os.path.join(root_path,"data","output", "mlflow_exp_logs","'roc_curve.png'")
-            mlflow.log_artifact("confusion_matrix_train.png")
+            #mlflow.log_artifact("confusion_matrix_train.png")
             # mlflow.log_artifact(mlflow_path_cm_val)
             # mlflow.log_artifact(mlflow_path_roc)
-
-            print(os.getcwd())
+            #print(os.getcwd())
+        
         #logging model in Hopsworks
 
         print('training Pipeline ran successfully')
