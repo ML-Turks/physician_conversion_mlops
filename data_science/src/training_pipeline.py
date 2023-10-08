@@ -44,7 +44,7 @@ class Trainmodel():
         self.aws_region = self.conf['s3']['aws_region']
         self.api_key = os.environ.get("HOPSWORKS_API_KEY") #load keys from github secrets
         self.project_name = os.environ.get("HOPSWORKS_PROJECT_NAME")
-        self.fs_table = self.conf['feature_store']['physician_conversion_mlops_feature_store']
+        self.fs_table = self.conf['feature_store']['table_name']
 
     def model_train(self):
         
