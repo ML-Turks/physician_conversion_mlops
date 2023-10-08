@@ -26,6 +26,7 @@ feature_store:
     label : ['target']
     description : "Physician conversion features- claims, procedure, demographic, etc."
     lookup_col_to_keep : ['npi_id', 'hcp_id','target']
+    model_directory : 'physician_conversion_classifier'
 
 mlflow:
     experiment_name:  "physician_conversion_mlops"
