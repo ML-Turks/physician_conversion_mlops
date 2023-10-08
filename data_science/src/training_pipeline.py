@@ -127,12 +127,13 @@ class Trainmodel():
                 X_val, y_val,
                   drop_id_col_list))
             
-
-            mlflow.log_artifact('confusion_matrix_train.png')
-            mlflow.log_artifact('confusion_matrix_validation.png')
-            mlflow.log_artifact('roc_curve.png')
-    
-
+            root_path = "..\.."
+            mlflow_path_cm_train = os.path.join(root_path,"data","output", "mlflow","confusion_matrix_train.png")
+            mlflow_path_cm_val = os.path.join(root_path,"data","output", "mlflow","confusion_matrix_validation.png")
+            mlflow_path_roc = os.path.join(root_path,"data","output", "mlflow","'roc_curve.png'")
+            mlflow.log_artifact(mlflow_path_cm_train)
+            mlflow.log_artifact(mlflow_path_cm_val)
+            mlflow.log_artifact(mlflow_path_roc)
     
 
         #logging model in Hopsworks
