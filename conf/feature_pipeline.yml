@@ -27,7 +27,7 @@ param_values:
 
 
 feature_store:
-    table_name: "physician_conversion_feature_table"
+    table_name: "physician_conversion_mlops_feature_store"
     lookup_key: ['npi_id', 'hcp_id']
     label : ['target']
     description : "Physician conversion features- claims, procedures, demographics, etc."
