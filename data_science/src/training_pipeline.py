@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import boto3
 from io import BytesIO
+import seaborn as sns
 
 #ML packages
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
@@ -15,6 +16,7 @@ import xgboost as xgb
 from urllib.parse import urlparse
 import mlflow
 from mlflow.tracking.client import MlflowClient
+import joblib
 
 #System and config packages
 import sys
@@ -24,6 +26,8 @@ import yaml #read config
 
 #feature store using hopsworks
 import hopsworks
+from hsml.schema import Schema
+from hsml.model_schema import ModelSchema
 
 #warning ignore package
 import warnings
@@ -137,7 +141,37 @@ class Trainmodel():
             #print(os.getcwd())
         
         #logging model in Hopsworks
+        input_schema = Schema(X_train.values)
+        output_schema = Schema(y_train)
+        model_schema = ModelSchema(input_schema=input_schema, output_schema=output_schema)
+        model_schema.to_dict()
 
+        model_dir= self.conf['feature_store']['model_directory']
+        if os.path.isdir(model_dir) == False:
+            os.mkdir(model_dir)
+        
+        joblib.dump(classifier, model_dir + '/xgboost_physician_classifier.pkl')
+
+        cm = utils.eval_cm(self,classifier, X_train, y_train, X_val,
+                                            y_val,drop_id_col_list)
+        cm.savefig(model_dir + "/confusion_matrix.png") 
+
+        roc = utils.roc_curve(self,classifier, 
+                            X_val,y_val,drop_id_col_list)
+        roc.savefig(model_dir + "/roc_curve.png") 
+
+
+        mr = project.get_model_registry()
+
+        model = mr.python.create_model(
+            name="xgboost_physician_classifier", 
+            metrics= utils.evaluation_metrics(self,classifier,X_train, y_train, X_val, y_val,
+                  drop_id_col_list),
+            model_schema=model_schema,
+            input_example=X_train.sample(), 
+            description="Physician conversion Predictor")
+
+        model.save(model_dir)
         print('training Pipeline ran successfully')
 
 
