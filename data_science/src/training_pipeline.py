@@ -152,13 +152,13 @@ class Trainmodel():
         
         joblib.dump(classifier, model_dir + '/xgboost_physician_classifier.pkl')
 
-        cm = utils.eval_cm(self,classifier, X_train, y_train, X_val,
-                                            y_val,drop_id_col_list)
-        cm.savefig(model_dir + "/confusion_matrix.png") 
+        # cm = utils.eval_cm(self,classifier, X_train, y_train, X_val,
+        #                                     y_val,drop_id_col_list)
+        # cm.savefig(model_dir + "/confusion_matrix.png") 
 
-        roc = utils.roc_curve(self,classifier, 
-                            X_val,y_val,drop_id_col_list)
-        roc.savefig(model_dir + "/roc_curve.png") 
+        # roc = utils.roc_curve(self,classifier, 
+        #                     X_val,y_val,drop_id_col_list)
+        # roc.savefig(model_dir + "/roc_curve.png") 
 
 
         mr = project.get_model_registry()
