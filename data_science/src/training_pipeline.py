@@ -111,15 +111,15 @@ class Trainmodel():
             mlflow.xgboost.log_model(classifier,artifact_path="usecase", registered_model_name="xgboost-model")
             
             #log confusion metrics
-            utils.eval_cm(classifier, X_train, y_train, X_val,
+            utils.eval_cm(self,classifier, X_train, y_train, X_val,
                                             y_val,drop_id_col_list)
             
             # log roc curve
-            utils.roc_curve(classifier, 
+            utils.roc_curve(self,classifier, 
                             X_val,y_val,drop_id_col_list)
             
             #Log model evaluation metrics
-            mlflow.log_metrics(utils.evaluation_metrics(
+            mlflow.log_metrics(utils.evaluation_metrics(self,
                 classifier,
                 X_train, y_train, 
                 X_val, y_val,
