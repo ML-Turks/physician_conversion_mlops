@@ -28,5 +28,5 @@ feature_store:
     lookup_col_to_keep : ['npi_id', 'hcp_id','target']
 
 mlflow:
-    experiment_name:  "./mlflow/physician_conversion_mlops"
+    experiment_name:  "physician_conversion_mlops"
     mlflow_run_name : "physician_conversion_experiments"
