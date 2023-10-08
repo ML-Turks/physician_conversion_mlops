@@ -205,6 +205,37 @@ class utils:
                 print(f"Column '{col}' not found in the DataFrame.")
 
     
+    def convert_columns_to_int(df, columns_to_remove=[]):
+        """
+        Convert specified columns in a DataFrame to integer type after removing specified columns.
+
+        Args:
+            df (pd.DataFrame): The DataFrame containing the columns to be converted.
+            columns_to_remove (list): A list of column names to be removed before conversion.
+
+        Returns:
+            pd.DataFrame: The DataFrame with specified columns converted to integer.
+
+        Example:
+        >>> df = pd.DataFrame({'A': ['1', '2', '3'], 'B': ['4', '5', '6'], 'C': ['7', '8', '9']})
+        >>> columns_to_remove = ['C']
+        >>> columns_to_convert = [col for col in df.columns if col not in columns_to_remove]
+        >>> converted_df = convert_columns_to_int(df, columns_to_remove)
+        >>> print(converted_df.dtypes)
+        A    int64
+        B    int64
+        dtype: object
+        """
+        columns_to_convert = [col for col in df.columns if col not in columns_to_remove]
+        
+        for col in columns_to_convert:
+            if col in df.columns:
+                df[col] = df[col].astype(int)
+            else:
+                print(f"Column '{col}' not found in the DataFrame.")
+
+
+    
     def eval_cm(self, model, X_train, y_train, X_val, y_val, drop_id_col_list):
         """
         Evaluate a classification model by plotting confusion matrices for both the training and validation sets.
