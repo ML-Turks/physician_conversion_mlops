@@ -205,7 +205,7 @@ class utils:
                 print(f"Column '{col}' not found in the DataFrame.")
 
     
-    def convert_columns_to_int(df, columns_to_remove=[]):
+    def convert_columns_to_int(self, df, columns_to_remove=[]):
         """
         Convert specified columns in a DataFrame to integer type after removing specified columns.
 
