@@ -90,8 +90,8 @@ class Trainmodel():
         
         #logging model in mlflow
         with mlflow.start_run():
-            drop_id_col_list = self.conf['feature_transformation'['id_col_list']]
-            best_params = self.conf['train_model_parameters'['model_params']]
+            drop_id_col_list = self.conf['feature_transformation']['id_col_list']
+            best_params = self.conf['train_model_parameters']['model_params']
                         
             # Train the final model with the best hyperparameters
             classifier = xgb.XGBClassifier(**best_params, random_state=42)
