@@ -49,10 +49,7 @@ class DataPrep:
         """
 
         # #Load data from s3
-        # bucket_name = self.conf['s3']['bucket_name']
         file_path = self.conf['s3']['file_path']
-        # aws_region = self.conf['s3']['aws_region']
-
         df_input = utils.load_data_from_s3(self, self.bucket_name,self.aws_region, file_path)
 
         #Clean column name and convert to lower case
@@ -151,6 +148,10 @@ class DataPrep:
         )
         
         #insert entire modeling data into featurestore
+        col_list = self.conf['feature_store']['lookup_key']
+        utils.convert_columns_to_string(self, df_feature_store,col_list)
+        utils.convert_columns_to_int(self, df_feature_store, col_list)
+
         physician_conversion_feature_group.insert(df_feature_store)
 
         print('Feature Pipeline ran successfully')
